@@ -1,0 +1,3 @@
+[submodule "FREETYPE"]
+	path = FREETYPE
+	url = https://github.com/AlessandroDellaFrattina/FREETYPE
