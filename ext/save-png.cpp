@@ -7,6 +7,8 @@
 #include <vector>
 #include "../core/pixel-conversion.hpp"
 
+#define MSDFGEN_USE_LODEPNG
+
 #ifdef MSDFGEN_USE_LIBPNG
 
 #include <png.h>

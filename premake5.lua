@@ -54,7 +54,9 @@ project "FREETYPE"
 		"FREETYPE/src/truetype/truetype.c",
 		"FREETYPE/src/type1/type1.c",
 		"FREETYPE/src/type42/type42.c",
-		"FREETYPE/src/winfonts/winfnt.c"
+		"FREETYPE/src/winfonts/winfnt.c",
+		"FREETYPE/src/svg/ftsvg.c",
+		"FREETYPE/src/svg/svg.c"
 	}
 
 	includedirs {
