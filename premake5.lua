@@ -62,7 +62,7 @@ project "FREETYPE"
 		"FREETYPE/include"
 	}
 
-	disablewarnings "4267"
+	disablewarnings { "4267", "4244" }
 
 	defines {
 
@@ -126,6 +126,8 @@ project "MSDFGEN"
 
 		"FREETYPE"
 	}
+
+	disablewarnings { "4267", "4244" }
 
 	filter "system:windows"
 		systemversion "latest"
