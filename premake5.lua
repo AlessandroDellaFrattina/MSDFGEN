@@ -62,6 +62,8 @@ project "FREETYPE"
 		"FREETYPE/include"
 	}
 
+	disablewarnings "4267"
+
 	defines {
 
 		"FT2_BUILD_LIBRARY",
