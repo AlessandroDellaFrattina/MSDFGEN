@@ -7,6 +7,16 @@ project "FREETYPE"
 	targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
 
+	includedirs {
+
+		"FREETYPE/include"
+	}
+
+	defines {
+
+		"FT2_BUILD_LIBRARY"
+	}
+
 	files {
 
 		"FREETYPE/include/ft2build.h",
@@ -59,22 +69,28 @@ project "FREETYPE"
 		"FREETYPE/src/svg/svg.c"
 	}
 
-	includedirs {
-
-		"FREETYPE/include"
-	}
-
 	disablewarnings { "4267", "4244" }
-
-	defines {
-
-		"FT2_BUILD_LIBRARY",
-		"_CRT_SECURE_NO_WARNINGS",
-		"_CRT_NONSTDC_NO_WARNINGS",
-	}
 
 	filter "system:windows"
 		systemversion "latest"
+
+		defines {
+
+			"_CRT_SECURE_NO_WARNINGS",
+			"_CRT_NONSTDC_NO_WARNINGS",
+		}
+
+	filter "system:macosx"
+
+		sysincludedirs {
+
+			"FREETYPE/include"
+		}
+
+		externalincludedirs {
+
+			"FREETYPE/include"
+		}
 
 	filter "configurations:Debug"
 		defines "VE_DEBUG"
@@ -101,6 +117,22 @@ project "MSDFGEN"
 	targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
 
+	includedirs {
+
+		"include",
+		"FREETYPE/include"
+	}
+
+	links {
+
+		"FREETYPE"
+	}
+
+	defines {
+
+		"MSDFGEN_USE_CPP11"
+	}
+
 	files {
 
 		"core/**.h",
@@ -113,26 +145,24 @@ project "MSDFGEN"
 		"include/**.h"
 	}
 
-	includedirs {
-
-		"include",
-		"FREETYPE/include"
-	}
-
-	defines {
-
-		"MSDFGEN_USE_CPP11"
-	}
-
-	links {
-
-		"FREETYPE"
-	}
-
 	disablewarnings { "4267", "4244" }
 
 	filter "system:windows"
 		systemversion "latest"
+
+	filter "system:macosx"
+
+		sysincludedirs {
+
+			"include",
+			"FREETYPE/include"
+		}
+
+		externalincludedirs {
+
+			"include",
+			"FREETYPE/include"
+		}
 
 	filter "configurations:Debug"
 		defines "VE_DEBUG"
