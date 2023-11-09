@@ -84,11 +84,6 @@ project "FREETYPE"
 
 	filter "system:macosx"
 
-		sysincludedirs {
-
-			"FREETYPE/include"
-		}
-
 		externalincludedirs {
 
 			"FREETYPE/include"
@@ -146,18 +141,11 @@ project "MSDFGEN"
 		"include/**.h"
 	}
 
-	disablewarnings { "4267", "4244" }
-
 	filter "system:windows"
 		systemversion "latest"
+		disablewarnings { "4267", "4244" }
 
 	filter "system:macosx"
-
-		sysincludedirs {
-
-			"include",
-			"FREETYPE/include"
-		}
 
 		externalincludedirs {
 
