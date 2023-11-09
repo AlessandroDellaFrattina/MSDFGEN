@@ -3,7 +3,6 @@ project "FREETYPE"
 	kind "StaticLib"
 	language "C"
 	staticruntime "On"
-
 	targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
 
@@ -69,8 +68,6 @@ project "FREETYPE"
 		"FREETYPE/src/svg/svg.c"
 	}
 
-	disablewarnings { "4267", "4244" }
-
 	filter "system:windows"
 		systemversion "latest"
 
@@ -78,6 +75,11 @@ project "FREETYPE"
 
 			"_CRT_SECURE_NO_WARNINGS",
 			"_CRT_NONSTDC_NO_WARNINGS",
+		}
+
+		disablewarnings {
+
+			"4267", "4244"
 		}
 
 	filter "system:macosx"
@@ -113,7 +115,6 @@ project "MSDFGEN"
 	language "C++"
 	cppdialect "C++17"
 	staticruntime "On"
-
 	targetdir ("%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
 
