@@ -1,27 +1,29 @@
+-- FREETYPE
+
 project "FREETYPE"
 	location "FREETYPE"
 	kind "StaticLib"
 	language "C"
-	staticruntime "Off"
-	targetdir ("%{wks.location}/bin/" .. outputdir .. "/lib")
-	objdir ("%{wks.location}/bin-int/" .. outputdir .. "/lib")
-
-	includedirs {
-
-		"FREETYPE/include"
-	}
+	staticruntime (sruntime)
+	targetdir (bin)
+	objdir (binint)
 
 	defines {
 
 		"FT2_BUILD_LIBRARY"
 	}
 
+	includedirs {
+
+		"FREETYPE/include"
+	}
+
 	files {
 
 		"FREETYPE/include/ft2build.h",
-		"FREETYPE/include/freetype/*.h",
-		"FREETYPE/include/freetype/config/*.h",
-		"FREETYPE/include/freetype/internal/*.h",
+		"FREETYPE/include/FREETYPE/*.h",
+		"FREETYPE/include/FREETYPE/config/*.h",
+		"FREETYPE/include/FREETYPE/internal/*.h",
 
 		"FREETYPE/src/autofit/autofit.c",
 		"FREETYPE/src/base/ftbase.c",
@@ -64,7 +66,6 @@ project "FREETYPE"
 		"FREETYPE/src/type1/type1.c",
 		"FREETYPE/src/type42/type42.c",
 		"FREETYPE/src/winfonts/winfnt.c",
-		"FREETYPE/src/svg/ftsvg.c",
 		"FREETYPE/src/svg/svg.c"
 	}
 
@@ -79,39 +80,46 @@ project "FREETYPE"
 
 		disablewarnings {
 
-			"4267", "4244"
+			"4267",
+			"4244"
 		}
 
 	filter "system:macosx"
 
 		externalincludedirs {
 
-			"FREETYPE/include"
+			"include"
 		}
 
 	filter "configurations:Debug"
-		defines "VE_DEBUG"
-		runtime "Debug"
-		symbols "On"
+		runtime (debugruntime)
+		symbols (debugsymbols)
+		optimize (debugoptimize)
 
 	filter "configurations:Release"
-		defines "VE_RELEASE"
-		runtime "Release"
-		symbols "On"
-		optimize "On"
+		runtime (releaseruntime)
+		symbols (releasesymbols)
+		optimize (releaseoptimize)
 
 	filter "configurations:Dist"
-		defines "VE_DIST"
-		runtime "Release"
-		optimize "On"
+		runtime (distruntime)
+		symbols (distsymbols)
+		optimize (distoptimize)
+
+-- MSDFGEN
 
 project "MSDFGEN"
 	kind "StaticLib"
 	language "C++"
 	cppdialect "C++17"
-	staticruntime "Off"
-	targetdir ("%{wks.location}/bin/" .. outputdir .. "/lib")
-	objdir ("%{wks.location}/bin-int/" .. outputdir .. "/lib")
+	staticruntime (sruntime)
+	targetdir (bin)
+	objdir (binint)
+
+	defines {
+
+		"MSDFGEN_USE_CPP11"
+	}
 
 	includedirs {
 
@@ -122,11 +130,6 @@ project "MSDFGEN"
 	links {
 
 		"FREETYPE"
-	}
-
-	defines {
-
-		"MSDFGEN_USE_CPP11"
 	}
 
 	files {
@@ -143,7 +146,12 @@ project "MSDFGEN"
 
 	filter "system:windows"
 		systemversion "latest"
-		disablewarnings { "4267", "4244" }
+
+		disablewarnings {
+
+			"4267",
+			"4244"
+		}
 
 	filter "system:macosx"
 
@@ -154,17 +162,16 @@ project "MSDFGEN"
 		}
 
 	filter "configurations:Debug"
-		defines "VE_DEBUG"
-		runtime "Debug"
-		symbols "On"
+		runtime (debugruntime)
+		symbols (debugsymbols)
+		optimize (debugoptimize)
 
 	filter "configurations:Release"
-		defines "VE_RELEASE"
-		runtime "Release"
-		symbols "On"
-		optimize "On"
+		runtime (releaseruntime)
+		symbols (releasesymbols)
+		optimize (releaseoptimize)
 
 	filter "configurations:Dist"
-		defines "VE_DIST"
-		runtime "Release"
-		optimize "On"
+		runtime (distruntime)
+		symbols (distsymbols)
+		optimize (distoptimize)
